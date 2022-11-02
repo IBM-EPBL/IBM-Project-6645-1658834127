@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+img {
+  border-radius: 10%;
+height:250px;
+width:250px;
+}
+</style>
+</head>
+<body>
+<script>
+  window.watsonAssistantChatOptions = {
+    integrationID: "cd261f8d-29c4-407f-af6a-2edcac4c7eb4", // The ID of this integration.
+    region: "au-syd", // The region your integration is hosted in.
+    serviceInstanceID: "67540c99-b991-4a07-9320-8ae2a1a6095f", // The ID of your service instance.
+    onLoad: function(instance) { instance.render(); }
+  };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+</script>
+<h1>The img element</h1>
+
+<img src="https://sjr.s3.jp-tok.cloud-object-storage.appdomain.cloud/HOS%201.jpg">
+<img src="https://sjr.s3.jp-tok.cloud-object-storage.appdomain.cloud/HOS%202.jpg">
+<img src="https://sjr.s3.jp-tok.cloud-object-storage.appdomain.cloud/HOS%203.jpg">
+<img src="https://sjr.s3.jp-tok.cloud-object-storage.appdomain.cloud/HOS%204.jpg">
+<img src="https://sjr.s3.jp-tok.cloud-object-storage.appdomain.cloud/HOS%206.png">
+</body>
+</html>
