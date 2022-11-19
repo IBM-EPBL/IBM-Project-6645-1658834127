@@ -1,0 +1,71 @@
+from flask import *  
+
+app = Flask(__name__) 
+
+app.secret_key = 'a'
+
+# @app.route("/",methods=['POST','GET']) 
+# @app.route("/") 
+@app.route('/')
+def hello():
+    return render_template('index.html')
+
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+@app.route('/job_listing')
+def job_listing():
+    return render_template('job_listing.html')
+
+@app.route('/job_details')
+def job_details():
+    return render_template('job_details.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/login')
+def login():
+    if request.method == 'POST':
+        username = request.form['email']
+        password = request.form['password']
+        sql = "SELECT * FROM users WHERE user_mail =? AND user_password=?"
+        stmt = ibm_db.prepare(con, sql)
+        ibm_db.bind_param(stmt,1,username)
+        ibm_db.bind_param(stmt,2,password)
+        ibm_db.execute(stmt)
+        account = ibm_db.fetch_assoc(stmt)
+        session['loggedin'] = True
+        session['username'] = account['USERNAME']
+        session['email'] = account['USER_MAIL']
+        return redirect('/')
+    else:
+        return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+   session.pop('loggedin', None)
+   session.pop('username', None)
+   session.pop('email', None)
+   return redirect('/')
+
+@app.route('/single-blog')
+def single_blog():
+    return render_template('single-blog.html')
+
+@app.route('/uploader')
+def uploader():
+    return render_template('uploader')
+
+if __name__ == "__main__":
+    app.run(debug=True)
